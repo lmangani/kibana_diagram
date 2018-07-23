@@ -11,6 +11,7 @@ const mscgenjs = require("mscgenjs/dist/webpack-issue-5316-workaround");
 
 module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Private) {
     var network_id = "diagram_" + $scope.$id;
+    var svg_id = "mscgenjsdiagram_" + $scope.$id;
 
     const queryFilter = Private(FilterBarQueryFilterProvider);
     const createTermsFilter = Private(AggTypesBucketsCreateFilterTermsProvider);
@@ -44,8 +45,8 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 
 		try {
 			$scope.tableGroups = resp;
-			console.log('tableGroups ready! Scope is:',$scope);
 			$scope.mscScript = '';
+			console.log('tableGroups ready! Scope is:',$scope);
 			if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return;
 			$scope.tableGroups.tables[0].rows.forEach(function(row){
 				var tmp = '';
@@ -69,6 +70,9 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
                 var container = document.getElementById(network_id);
                 container.style.height = container.getBoundingClientRect().height;
                 container.height = container.getBoundingClientRect().height;
+		// Cleanup any existing diagram
+                var svg = document.getElementById(svg_id);
+		if (svg) svg.remove();
 
                 $scope.initialShows();
                 $(".secondNode").hide();
