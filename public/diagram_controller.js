@@ -34,7 +34,6 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 
     $scope.initialShows = function(){
       $("#net").show();
-      $("#loading").show();
       $("#errorHtml").hide();
     }
 
@@ -59,11 +58,11 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 			$scope.mscScript = '';
 			if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return false;
 			$scope.tableGroups.tables[0].rows.forEach(function(row){
-				var tmp;
+				var tmp, t;
 				var columns = $scope.tableGroups.tables[0].columns.length;
 				for(t=0;t<columns;t++){
 					if(t % 2 === 0) {
-					  if (row[t+2] tmp+=row[t].value+'=>>';
+					  if (row[t+2]) tmp+=row[t].value+'=>>';
 					  else tmp+=row[t]+':'+row[t+1].value+';';
 					}
 				}
