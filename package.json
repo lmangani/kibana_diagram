@@ -1,6 +1,9 @@
 {
   "name": "kibana_diagram",
   "version": "6.2.4",
+  "kibana": {
+    "version": "6.2.4"
+  },
   "authors": [
     "Lorenzo Mangani <lorenzo.mangani@gmail.com>"
   ],

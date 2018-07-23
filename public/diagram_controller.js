@@ -14,7 +14,8 @@ const mscgenjs = require("mscgenjs/dist/webpack-issue-5316-workaround");
 // add a controller to the module, which will transform the esResponse into a
 // tabular format that we can pass to the table directive
 module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Private) {
-    var network_id = "svg_" + $scope.$id;
+    var network_id = "diagram_" + $scope.$id;
+    var svg_id = "svg_" + $scope.$id;
     var loading_id = "loading_" + $scope.$parent.$id;
 
     const queryFilter = Private(FilterBarQueryFilterProvider);
@@ -52,27 +53,28 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             if($scope.vis.aggs.bySchemaName['first'].length >= 1){
 
-	        if (popupMenu !== undefined) {
-		    popupMenu.parentNode.removeChild(popupMenu);
-		    popupMenu = undefined;
-		}
-
 		try {
 			$scope.tableGroups = resp;
 			console.log('tableGroups ready! Scope is:',$scope);
+			$scope.mscScript = '';
+			if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return false;
+			$scope.tableGroups.tables[0].rows.forEach(function(row){
+				var tmp;
+				var columns = $scope.tableGroups.tables[0].columns.length;
+				for(t=0;t<columns;t++){
+					if(t % 2 === 0) {
+					  if (row[t+2] tmp+=row[t].value+'=>>';
+					  else tmp+=row[t]+':'+row[t+1].value+';';
+					}
+				}
+				$scope.mscScript+=tmp;
+			});
+			console.log('mscgenny ready! script is:', $scope.mscScript);
 
 		} catch(e) {
-			$scope.errorCustom('tabifyAggResponse error! '+ e); 
+			$scope.errorCustom('tabifyAggResponse error! '+ e);
 		}
 
-//////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		try {
-			$scope.processTableGroups($scope.tableGroups);
-
-		} catch(e) {
-	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
-
-		}
 //////////////////////////////////////////////////////////Creation of Diagram Flows //////////////////////////////////////////////////////////
 
                 // Creation of the network
@@ -86,9 +88,10 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 		// START quence stuff!
 
 		mscgenjs.renderMsc (
-		  'msc { a,b; a=>>b[label="render this"; }',
+		  $scope.mscScript || 'a=>>b:render this;',
 		  {
-		    elementId: network_id,
+		    elementId: svg_id,
+		    inputType: "msgenny",
 		    additionalTemplate: "lazy",
                     mirrorEntitiesOnBottom: true
 		  },
