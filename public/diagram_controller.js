@@ -43,7 +43,8 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
         if ($scope.vis.aggs.bySchemaName['first'].length >= 1) {
           try {
             $scope.tableGroups = resp
-            $scope.mscScript = ''
+	    $scope.mscScript = 'hscale="1.0",width="auto";';
+
             console.log('tableGroups ready! Scope is:', $scope)
             if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return
             $scope.tableGroups.tables[0].rows.forEach(function (row) {
@@ -70,14 +71,11 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
           // Cleanup any existing diagram
           var svg = document.getElementById(svg_id)
           if (svg) svg.remove()
-	  // Bound to actual container width
-	  var options = 'hscale="1.1",width="'+container.style.width+'";'
-	  $scope.mscScript = options + $scope.mscScript;
 
           $scope.initialShows()
 
           mscgenjs.renderMsc(
-		  $scope.mscScript || 'null;',
+		  $scope.mscScript || 'undefined;',
 		  {
 		    elementId: network_id,
 		    inputType: 'msgenny',
@@ -94,7 +92,7 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 		  }
           }
         } else {
-          $scope.errorCustom('Error: Please select at least one Node', 1)
+          $scope.errorCustom('Error: Please select at least one aggregation', 1)
         }
 
       // $timeout tail
