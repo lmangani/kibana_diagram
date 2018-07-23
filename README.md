@@ -1,4 +1,4 @@
-<img width=222 src="https://user-images.githubusercontent.com/1423657/35244908-15f41bd4-ffc2-11e7-9303-9a87a271d67a.png"/>
+<img width=100 border=1 src="https://user-images.githubusercontent.com/1423657/43099944-1483f2f6-8ec4-11e8-98ac-916bdcebc7d0.png"/>
 
 ## Kibana Diagram
 
