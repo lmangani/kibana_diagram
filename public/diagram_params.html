@@ -28,75 +28,10 @@
 </div>
 
 <div>
-  <span>Node:</span>
-  <!-- div colorpicker ng-model="vis.params.firstNodeColor"-->
-  <input type="color" ng-model="vis.params.firstNodeColor" class="form-control"/>
-  <!--/div-->
-</div>
-
-<div class="secondNode">
-  <span>Second Node:</span>
-  <input type="color" ng-model="vis.params.secondNodeColor" class="form-control"/>
-</div>
-
-<div>
   <span>Labels:</span>
   <input type="color" ng-model="vis.params.labelColor" class="form-control"/>
 </div>
 
-
-<br>
-
-/*
-<h5><strong>Directional Edges</strong></h5>
-<table>
-    <tbody>
-        <tr>
-            <td>Display directional edge:&nbsp;</td>
-            <td><input type="checkbox" ng-model="vis.params.displayArrow"></td>
-        </tr>
-        <tr>
-            <td>Endpoint position:&nbsp;</td>
-            <td>
-                <select class="form-control" ng-model="vis.params.posArrow" id="sel4">
-                    <option value="from">Beginning</option>
-                    <option value="middle">Middle</option>
-                    <option value="to">End side</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Endpoint Type:</td>
-            <td>
-                <select class="form-control" ng-model="vis.params.shapeArrow" id="sel3">
-                    <option value="arrow">Arrow</option>
-                    <option value="circle">Circle</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Scale Factor:</td>
-            <td><input type="number" ng-model="vis.params.scaleArrow" min="0"></td>
-        </tr>
-        <tr>
-            <td>Smooth type:</td>
-            <td>
-                <select class="form-control" ng-model="vis.params.smoothType" id="sel5">
-                    <option value="dynamic">Dynamic</option>
-                    <option value="continuous">Continuous Anchor</option>
-                    <option value="discrete">Discrete Anchor</option>
-                    <option value="diagonalCross">Diagonal Anchor</option>
-                    <option value="straightCross">Straight Line</option>
-                    <option value="horizontal">Horizontal Anchor</option>
-                    <option value="vertical">Vertical Anchor</option>
-                    <option value="curvedCW">Clock-wise Curve</option>
-                    <option value="curvedCCW">Counter-Clock-wise Curve</option>
-                    <option value="cubicBezier">Cubic Bezier</option>
-                </select>
-            </td>
-        </tr>
-    </tbody>
-</table>
 
 <br>
 
@@ -114,44 +49,6 @@
     <input type="checkbox" ng-model="vis.params.showColorLegend">
     Show Color Legend (Node Color selected)
   </label>
-  <label>
-    <input type="checkbox" ng-model="vis.params.nodePhysics">
-    Nodes Acting like Springs
-  </label>
 </div>
 
 <br>
-
-<h5><strong>Network constants</strong></h5>
-<div>
-  Attraction Force
-  <input type="number" ng-model="vis.params.gravitationalConstant" id="gravC">
-</div>
-<div>
-  Spring Force
-  <input type="number" ng-model="vis.params.springConstant" id="springC">
-</div>
-
-<hr>
-
-<h4>Top Values</h4>
-<div>
-  Node Size
-  <input type="number" ng-model="vis.params.maxCutMetricSizeNode" min="1">
-</div>
-<div>
-  Edge Size
-  <input type="number" ng-model="vis.params.maxCutMetricSizeEdge" min="1">
-</div>
-<hr>
-
-<h4>Don't show nodes below this value:</h4>
-<div>
-  Node Size
-  <input type="number" ng-model="vis.params.minCutMetricSizeNode" min="0">
-</div>
-<hr>
-
-*/
-
-<hr>

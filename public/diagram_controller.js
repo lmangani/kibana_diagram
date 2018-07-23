@@ -36,7 +36,7 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
     $('#errorHtml').hide()
   }
 
-  $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp, secondNodeColor]) {
+  $scope.$parent.$watchMulti(['esResponse'], function ([resp]) {
     if (resp && $scope.vis) {
 	  var rawResponse = $scope.vis.aggs.toDsl()
       $timeout(function () {
@@ -70,9 +70,11 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
           // Cleanup any existing diagram
           var svg = document.getElementById(svg_id)
           if (svg) svg.remove()
+	  // Bound to actual container width
+	  var options = 'hscale="1.1",width="'+container.style.width+'";'
+	  $scope.mscScript = options + $scope.mscScript;
 
           $scope.initialShows()
-          $('.secondNode').hide()
 
           mscgenjs.renderMsc(
 		  $scope.mscScript || 'null;',
@@ -95,8 +97,8 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
           $scope.errorCustom('Error: Please select at least one Node', 1)
         }
 
-	  // $timeout tail
-	  })
+      // $timeout tail
+      })
     }
   })
 })
