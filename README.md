@@ -4,7 +4,7 @@
 
 Kibana plugin to Visualize aggregations diagrams using [mscgen](https://mscgen.js.org) for rendering.
 
-![image](https://user-images.githubusercontent.com/1423657/43055683-440d4efa-8e38-11e8-9367-44e484e7bf90.png)
+<img width=400 src="https://user-images.githubusercontent.com/1423657/43055683-440d4efa-8e38-11e8-9367-44e484e7bf90.png"/>
 
 ### Create Kibana Plugin archive (zip)
 ```
@@ -18,7 +18,7 @@ Kibana plugin to Visualize aggregations diagrams using [mscgen](https://mscgen.j
 
 The plugin will automatically display a diagram with relations derived from the returned aggregations.
 
-
+![ezgif com-optimize 2](https://user-images.githubusercontent.com/1423657/43073006-548fc254-8e78-11e8-8005-38b1aa55d66c.gif)
 
 ### Acknowledgement
 
