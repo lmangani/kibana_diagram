@@ -7,12 +7,8 @@ import { AggResponseTabifyProvider } from 'ui/agg_response/tabify/tabify';
 
 const module = uiModules.get('kibana/kibana_diagram', ['kibana']);
 
-//import the npm modules
 const mscgenjs = require("mscgenjs/dist/webpack-issue-5316-workaround");
-//const mscgenjs = require('mscgenjs');
 
-// add a controller to the module, which will transform the esResponse into a
-// tabular format that we can pass to the table directive
 module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Private) {
     var network_id = "diagram_" + $scope.$id;
     var svg_id = "svg_" + $scope.$id;
@@ -47,18 +43,17 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 	if (resp && $scope.vis ) {
 	  var rawResponse = $scope.vis.aggs.toDsl();
           $timeout(function () {
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////NODE-NODE-RELATION Type///////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             if($scope.vis.aggs.bySchemaName['first'].length >= 1){
 
 		try {
 			$scope.tableGroups = resp;
 			console.log('tableGroups ready! Scope is:',$scope);
 			$scope.mscScript = '';
-			if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return false;
+			if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return;
 			$scope.tableGroups.tables[0].rows.forEach(function(row){
-				var tmp, t;
+				var tmp = '';
+				var t = 0;
 				var columns = $scope.tableGroups.tables[0].columns.length;
 				for(t=0;t<columns;t++){
 					if(t % 2 === 0) {
@@ -74,20 +69,17 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 			$scope.errorCustom('tabifyAggResponse error! '+ e);
 		}
 
-//////////////////////////////////////////////////////////Creation of Diagram Flows //////////////////////////////////////////////////////////
-
-                // Creation of the network
+                // Prep containers
                 var container = document.getElementById(network_id);
-                //Set the Height
+                var container_diagram = document.getElementById(svg_id);
                 container.style.height = container.getBoundingClientRect().height;
                 container.height = container.getBoundingClientRect().height;
 
                 $scope.initialShows();
                 $(".secondNode").hide();
-		// START quence stuff!
 
 		mscgenjs.renderMsc (
-		  $scope.mscScript || 'a=>>b:render this;',
+		  $scope.mscScript || 'null;',
 		  {
 		    elementId: svg_id,
 		    inputType: "msgenny",
@@ -101,12 +93,12 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 		  if (Boolean(pError)){
 		    if (pError) $scope.errorCustom('msc error: '+ pError);
 		    else $scope.doneLoading();
+		    container_diagram.style.height = container.style.height;
+		    container_diagram.style.width = container.style.width;
 		    return;
 		  }
 		}
-		// END quence stuff
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             }else{
 		$scope.errorCustom('Error: Please select at least one Node',1);
             }
