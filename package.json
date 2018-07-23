@@ -1,0 +1,15 @@
+{
+  "name": "kibana_diagram",
+  "version": "6.2.4",
+  "authors": [
+    "Lorenzo Mangani <lorenzo.mangani@gmail.com>"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lmangani/kibana_diagram"
+  },
+  "dependencies": {
+    "mscgenjs": "^2.0.0"
+  }
+}
