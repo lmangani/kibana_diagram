@@ -36,6 +36,11 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
     $('#errorHtml').hide()
   }
 
+  $scope.safeReturn = function(val) {
+	if (!val||val=='') return 'undef';
+	else return val;
+  }
+
   $scope.$parent.$watchMulti(['esResponse'], function ([resp]) {
     if (resp && $scope.vis) {
 	  var rawResponse = $scope.vis.aggs.toDsl()
@@ -53,7 +58,12 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
               var columns = $scope.tableGroups.tables[0].columns.length;
               for (t = 0; t < columns; t++) {
                 if (t % 2 === 0) {
-		  if (row[t + 2]) tmp += row[t].value + '->' + row[t+2].value + ':' + row[t+1].value + ';';
+		  if (row[t + 2]) {
+			    tmp += $scope.safeReturn(row[t].value)
+				+ '->' + $scope.safeReturn(row[t+2].value)
+				+ ':' + $scope.safeReturn(row[t+1].value)
+				+ ';';
+		  }
                 }
               }
               $scope.mscScript += tmp;
