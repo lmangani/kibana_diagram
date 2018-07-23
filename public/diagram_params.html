@@ -1,5 +1,25 @@
+<h4><strong>Style</strong></h4>
 
-<h4>Relationship style</h4>
+<div class="form-group">
+  <label for="sel1">Diagram: </label>
+   <select class="form-control" ng-model="vis.params.diagramStyle" id="sel1">
+     <option value="classic">Classic</option>
+     <option value="basic">Basic</option>
+     <option value="lazy">Lazy</option>
+     <option value="">No Boxes</option>
+   </select>
+</div>
+
+
+<div class="form-group">
+  <label for="sel2">Mirror Entities On Bottom: </label>
+   <select class="form-control" ng-model="vis.params.mirrorEntitiesOnBottom" id="sel2">
+     <option value="true">True</option>
+     <option value="false">False</option>
+   </select>
+</div>
+
+<hr>
 
 <h5><strong>Default colors</strong></h5>
 <div>
@@ -27,67 +47,7 @@
 
 <br>
 
-<h5><strong>Size</strong></h5>
-<table>
-    <tbody>
-        <tr>
-            <td>Max Node Size&nbsp;</td>
-            <td><input type="number" ng-model="vis.params.maxNodeSize" min="1"></td>
-        </tr>
-        <tr>
-            <td>Min Node Size&nbsp;</td>
-            <td><input type="number" ng-model="vis.params.minNodeSize" min="1"></td>
-        </tr>
-        <tr>
-            <td>Max Edge Width&nbsp;</td>
-            <td><input type="number" ng-model="vis.params.maxEdgeSize" min="1"></td>
-        </tr>
-        <tr>
-            <td>Min Edge Width&nbsp;</td>
-            <td><input type="number" ng-model="vis.params.minEdgeSize" min="0.1"></td>
-        </tr>
-    </tbody>
-</table>
-
-<br>
-
-<h5><strong>Shapes</strong></h5>
-<div class="form-group">
-  <label for="sel1">Node: </label>
-   <select class="form-control" ng-model="vis.params.shapeFirstNode" id="sel1">
-     <option value="circle">Circle</option>
-     <option value="dot">Dot</option>
-     <option value="ellipse">Ellipse</option>
-     <option value="database">DataBase</option>
-     <option value="box">Box</option>
-     <option value="text">Only Text </option>
-     <option value="diamond">Diamond</option>
-     <option value="star">Star</option>
-     <option value="triangle">Triangle</option>
-     <option value="triangleDown">Triangle Down</option>
-     <option value="square">Square</option>
-   </select>
-</div>
-
-<div class="form-group secondNode">
-  <label for="sel2">Second Node: </label>
-   <select class="form-control" ng-model="vis.params.shapeSecondNode" id="sel2">
-     <option value="circle">Circle</option>
-     <option value="dot">Dot</option>
-     <option value="ellipse">Ellipse</option>
-     <option value="database">DataBase</option>
-     <option value="box">Box</option>
-     <option value="text">Only Text </option>
-     <option value="diamond">Diamond</option>
-     <option value="star">Star</option>
-     <option value="triangle">Triangle</option>
-     <option value="triangleDown">Triangle Down</option>
-     <option value="square">Square</option>
-   </select>
-</div>
-
-<br>
-
+/*
 <h5><strong>Directional Edges</strong></h5>
 <table>
     <tbody>
@@ -192,5 +152,6 @@
 </div>
 <hr>
 
+*/
 
 <hr>

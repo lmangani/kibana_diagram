@@ -1,25 +1,24 @@
-import "plugins/kibana_diagram/diagram.less";
-import 'plugins/kibana_diagram/diagram_controller';
+import 'plugins/kibana_diagram/diagram.less'
+import 'plugins/kibana_diagram/diagram_controller'
 
-import 'ui/agg_table';
-import 'ui/agg_table/agg_table_group';
+import 'ui/agg_table'
+import 'ui/agg_table/agg_table_group'
 
-import { CATEGORY } from 'ui/vis/vis_category';
-import { VisFactoryProvider } from 'ui/vis/vis_factory';
-import { VisSchemasProvider } from 'ui/vis/editors/default/schemas';
-import { VisTypesRegistryProvider } from 'ui/registry/vis_types';
-import image from './images/icon-network.svg';
-import networkVisTemplate from 'plugins/kibana_diagram/diagram.html';
-import networkVisParamsTemplate from 'plugins/kibana_diagram/diagram_params.html';
-
+import { CATEGORY } from 'ui/vis/vis_category'
+import { VisFactoryProvider } from 'ui/vis/vis_factory'
+import { VisSchemasProvider } from 'ui/vis/editors/default/schemas'
+import { VisTypesRegistryProvider } from 'ui/registry/vis_types'
+import image from './images/icon-network.svg'
+import networkVisTemplate from 'plugins/kibana_diagram/diagram.html'
+import networkVisParamsTemplate from 'plugins/kibana_diagram/diagram_params.html'
 
 // register the provider with the visTypes registry
-VisTypesRegistryProvider.register(NetworkVisTypeProvider);
+VisTypesRegistryProvider.register(NetworkVisTypeProvider)
 
 // define the TableVisType
-function NetworkVisTypeProvider(Private) {
-  const VisFactory = Private(VisFactoryProvider);
-  const Schemas = Private(VisSchemasProvider);
+function NetworkVisTypeProvider (Private) {
+  const VisFactory = Private(VisFactoryProvider)
+  const Schemas = Private(VisSchemasProvider)
 
   // return the visType object, which kibana will use to display and configure new
   // Vis object of this type.
@@ -35,7 +34,7 @@ function NetworkVisTypeProvider(Private) {
         showLabels: true,
         showPopup: false,
         nodeFilter: false,
-	hideEdgesOnDrag: false,
+        hideEdgesOnDrag: false,
         showColorLegend: true,
         nodePhysics: true,
         firstNodeColor: '#FD7BC4',
@@ -59,7 +58,7 @@ function NetworkVisTypeProvider(Private) {
         gravitationalConstant: -35000,
         labelColor: '#000000'
       },
-      template: networkVisTemplate,
+      template: networkVisTemplate
     },
     editorConfig: {
       optionsTemplate: networkVisParamsTemplate,
@@ -75,7 +74,7 @@ function NetworkVisTypeProvider(Private) {
           group: 'metrics',
           name: 'size_edge',
           title: 'Edge Size',
-          max: 1,
+          max: 1
         },
         {
           group: 'buckets',
@@ -84,21 +83,20 @@ function NetworkVisTypeProvider(Private) {
           mustBeFirst: 'true',
           title: 'Node',
           min: 1,
-          aggFilter: ['terms']//Only have sense choose terms
+          aggFilter: ['terms']// Only have sense choose terms
         }
       ])
     },
     responseHandlerConfig: {
       asAggConfigResults: true
     },
-    ////////MIRAR THIS
+    /// /////MIRAR THIS
     hierarchicalData: function (vis) {
-      return true;
-    },
-    ////////////////////
+      return true
+    }
+    /// /////////////////
 
-
-  });
+  })
 }
 
-export default NetworkVisTypeProvider;
+export default NetworkVisTypeProvider
