@@ -86,10 +86,8 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
           )
 
           function handleRenderMscResult (pError, pSuccess) {
-		  if (pError) {
-		    if (pError) $scope.errorCustom('msc error: ' + pError)
-		    else $scope.doneLoading()
-		  }
+		  if (pError) { console.log('msc error: ',pError);
+		  } else { $scope.doneLoading(); }
           }
         } else {
           $scope.errorCustom('Error: Please select at least one aggregation', 1)
