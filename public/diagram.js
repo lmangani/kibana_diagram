@@ -26,7 +26,7 @@ function NetworkVisTypeProvider (Private) {
     name: 'diagram',
     title: 'Diagram',
     image,
-    description: 'Displays a flow diagram from query results',
+    description: 'Displays flow diagrams from query results',
     category: CATEGORY.OTHER,
 
     visConfig: {
@@ -71,18 +71,12 @@ function NetworkVisTypeProvider (Private) {
           max: 1
         },
         {
-          group: 'metrics',
-          name: 'size_edge',
-          title: 'Edge Size',
-          max: 1
-        },
-        {
           group: 'buckets',
           name: 'first',
           icon: 'fa fa-circle-thin',
           mustBeFirst: 'true',
           title: 'Node',
-          min: 1,
+          min: 2,
           aggFilter: ['terms']// Only have sense choose terms
         }
       ])
@@ -90,11 +84,9 @@ function NetworkVisTypeProvider (Private) {
     responseHandlerConfig: {
       asAggConfigResults: true
     },
-    /// /////MIRAR THIS
     hierarchicalData: function (vis) {
       return true
     }
-    /// /////////////////
 
   })
 }
