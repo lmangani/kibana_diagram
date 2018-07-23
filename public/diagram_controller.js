@@ -11,8 +11,6 @@ const mscgenjs = require("mscgenjs/dist/webpack-issue-5316-workaround");
 
 module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Private) {
     var network_id = "diagram_" + $scope.$id;
-    var svg_id = "svg_" + $scope.$id;
-    var loading_id = "loading_" + $scope.$parent.$id;
 
     const queryFilter = Private(FilterBarQueryFilterProvider);
     const createTermsFilter = Private(AggTypesBucketsCreateFilterTermsProvider);
@@ -23,7 +21,6 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
       if(!message) message = "General Error. Please undo your changes.";
       if(hide) {
 	$("#" + network_id).hide();
-      	$("#" + loading_id).hide();
       }
       notify.error(message);
     }
@@ -35,7 +32,6 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 
     $scope.doneLoading = function(){
       $("#net").show();
-      $("#loading").hide();
       $("#errorHtml").hide();
     }
 
@@ -71,7 +67,6 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 
                 // Prep containers
                 var container = document.getElementById(network_id);
-                var container_diagram = document.getElementById(svg_id);
                 container.style.height = container.getBoundingClientRect().height;
                 container.height = container.getBoundingClientRect().height;
 
@@ -81,7 +76,7 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 		mscgenjs.renderMsc (
 		  $scope.mscScript || 'null;',
 		  {
-		    elementId: svg_id,
+		    elementId: network_id,
 		    inputType: "msgenny",
 		    additionalTemplate: "lazy",
                     mirrorEntitiesOnBottom: true
@@ -93,8 +88,6 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 		  if (Boolean(pError)){
 		    if (pError) $scope.errorCustom('msc error: '+ pError);
 		    else $scope.doneLoading();
-		    container_diagram.style.height = container.style.height;
-		    container_diagram.style.width = container.style.width;
 		    return;
 		  }
 		}
