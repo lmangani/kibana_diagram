@@ -48,16 +48,15 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
             console.log('tableGroups ready! Scope is:', $scope)
             if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return
             $scope.tableGroups.tables[0].rows.forEach(function (row) {
-              var tmp = ''
-              var t = 0
-              var columns = $scope.tableGroups.tables[0].columns.length
+              var tmp = '';
+              var t = 0;
+              var columns = $scope.tableGroups.tables[0].columns.length;
               for (t = 0; t < columns; t++) {
                 if (t % 2 === 0) {
-					  if (row[t + 2]) tmp += row[t].value + '=>>'
-					  else tmp += row[t] + ':' + row[t + 1].value + ';'
+		  if (row[t + 2]) tmp += row[t].value + '->' + row[t+2].value + ':' + row[t+1].value + ';';
                 }
               }
-              $scope.mscScript += tmp
+              $scope.mscScript += tmp;
             })
             console.log('mscgenny ready! script is:', $scope.mscScript)
           } catch (e) {
@@ -86,7 +85,7 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
           )
 
           function handleRenderMscResult (pError, pSuccess) {
-		  if (pError) { console.log('msc error: ',pError);
+		  if (pError) { console.log('msc error: ',pError,$scope.mscScript);
 		  } else { $scope.doneLoading(); }
           }
         } else {
