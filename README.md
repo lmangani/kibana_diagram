@@ -20,6 +20,15 @@ The plugin will automatically display a diagram with relations derived from the 
 
 ![ezgif com-optimize 2](https://user-images.githubusercontent.com/1423657/43073006-548fc254-8e78-11e8-8005-38b1aa55d66c.gif)
 
+### Status
+- This plugin is *experiemental* - use at your own risk!
+- Contributors are welcome! Join us make this into something useful!
+#### TODO
+- [ ] Deep Test & Debug
+- [ ] Implement colors in msc
+- [ ] Implement links in msc
+- [ ] Implement non-aggregated view
+
 ### Acknowledgement
 
 Elasticsearch and Kibana are trademarks of Elasticsearch BV, registered in the U.S. and in other countries.
