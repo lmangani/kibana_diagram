@@ -70,7 +70,9 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
         if ($scope.vis.aggs.bySchemaName['first'].length >= 1) {
           try {
             $scope.tableGroups = resp;
-	    $scope.mscScript = 'msc {  ';
+	    $scope.mscScript = 'msc { ';
+	    $scope.mscScript += ' width="auto"; ';
+
   	    $scope.uniqueIds = [];
 	    $scope.uniqueHeaders = [];
             var tmp = '';
@@ -113,7 +115,8 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
 		  $scope.mscScript || 'msc {}',
 		  {
 		    elementId: network_id,
-		    // inputType: 'msgenny',
+		    inputType: 'xu',
+		    width: 'auto',
 		    additionalTemplate: $scope.vis.params.diagramStyle || 'classic',
 	            mirrorEntitiesOnBottom: $scope.vis.params.mirrorEntitiesOnBottom || true
 		  },
