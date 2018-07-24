@@ -41,4 +41,5 @@ The plugin will automatically display a diagram with relations derived from the 
 
 Elasticsearch and Kibana are trademarks of Elasticsearch BV, registered in the U.S. and in other countries.
 
+Visualization based on [mscgenjs](https://github.com/mscgenjs), a GPL-3.0 project by Sander Verweij
 

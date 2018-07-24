@@ -18,6 +18,21 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
   const createFilter = Private(AggTypesBucketsCreateFilterFiltersProvider)
   const tabifyAggResponse = Private(AggResponseTabifyProvider)
 
+  function hashCode(str) { // java String#hashCode
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+       hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return hash;
+  }
+
+  function intToARGB(i){
+    return ((i>>24)&0xFF).toString(16) + 
+           ((i>>16)&0xFF).toString(16) + 
+           ((i>>8)&0xFF).toString(16) + 
+           (i&0xFF).toString(16);
+  }
+
   $scope.errorCustom = function (message, hide) {
     if (!message) message = 'General Error. Please undo your changes.'
     if (hide) {
@@ -36,9 +51,16 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
     $('#errorHtml').hide()
   }
 
+  $scope.uniqueIds = [];
+  $scope.uniqueHeaders = [];
   $scope.safeReturn = function(val) {
-	if (!val||val=='') return 'undef';
-	else return val;
+	if (!val||val=='') val = 'undef';
+	if ($scope.uniqueIds.indexOf(val) === -1){
+		var col = intToARGB(hashCode(val));
+		$scope.uniqueIds.push(val);
+		$scope.uniqueHeaders.push('"'+ val +'" [linecolor="#'+col+'", textbgcolor="#'+col+'", arclinecolor="#'+col+'"]');
+	}
+	return val;
   }
 
   $scope.$parent.$watchMulti(['esResponse'], function ([resp]) {
@@ -47,28 +69,34 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
       $timeout(function () {
         if ($scope.vis.aggs.bySchemaName['first'].length >= 1) {
           try {
-            $scope.tableGroups = resp
-	    $scope.mscScript = 'hscale="1.0",width="auto";';
+            $scope.tableGroups = resp;
+	    $scope.mscScript = 'msc { ';
+	    $scope.mscScript += ' width="auto"; ';
 
+  	    $scope.uniqueIds = [];
+	    $scope.uniqueHeaders = [];
+            var tmp = '';
             console.log('tableGroups ready! Scope is:', $scope)
+
             if (!$scope.tableGroups.tables && !$scope.tableGroups.tables[0].rows) return
             $scope.tableGroups.tables[0].rows.forEach(function (row) {
-              var tmp = '';
               var t = 0;
               var columns = $scope.tableGroups.tables[0].columns.length;
               for (t = 0; t < columns; t++) {
                 if (t % 2 === 0) {
 		  if (row[t + 2]) {
-			    tmp += $scope.safeReturn(row[t].value)
-				+ '->' + $scope.safeReturn(row[t+2].value)
-				+ ':' + $scope.safeReturn(row[t+1].value)
-				+ ';';
+			    tmp += '"' + $scope.safeReturn(row[t].value) + '"'
+				+ ' => ' + '"' + $scope.safeReturn(row[t+2].value) + '"'
+				+ ' [label="' + row[t+1].value + '"];';
 		  }
                 }
               }
-              $scope.mscScript += tmp;
             })
-            console.log('mscgenny ready! script is:', $scope.mscScript)
+            $scope.mscScript += $scope.uniqueHeaders.join(', ') + '; ';
+            $scope.mscScript += tmp;
+	    $scope.mscScript += " }";
+
+            console.log('mscg ready! script is:', $scope.mscScript)
           } catch (e) {
             $scope.errorCustom('tabifyAggResponse error! ' + e)
           }
@@ -84,12 +112,13 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
           $scope.initialShows()
 
           mscgenjs.renderMsc(
-		  $scope.mscScript || 'undefined;',
+		  $scope.mscScript || 'msc {}',
 		  {
 		    elementId: network_id,
-		    inputType: 'msgenny',
+		    inputType: 'xu',
+		    width: 'auto',
 		    additionalTemplate: $scope.vis.params.diagramStyle || 'classic',
-              mirrorEntitiesOnBottom: $scope.vis.params.mirrorEntitiesOnBottom || true
+	            mirrorEntitiesOnBottom: $scope.vis.params.mirrorEntitiesOnBottom || true
 		  },
 		  handleRenderMscResult
           )
