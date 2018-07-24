@@ -25,17 +25,17 @@ kibana-plugin install https://github.com/lmangani/kibana_diagram/raw/master/dist
 
 The plugin will automatically display a diagram with relations derived from the returned aggregations.
 
-![ezgif com-optimize 16](https://user-images.githubusercontent.com/1423657/43084057-3444292a-8e98-11e8-947b-edc2db3cbe9b.gif)
+![ezgif com-optimize 3](https://user-images.githubusercontent.com/1423657/43161289-fbea4168-8f87-11e8-82a0-95d90f00cc21.gif)
 
 ### Status
 - This plugin is *experiemental* - use at your own risk!
 - Contributors are welcome! Join us make this into something useful!
 #### TODO
 - [x] Implement Agg to Diagram baseline
-- [ ] Deep Test & Debug
-- [ ] Implement colors in msc
+- [x] Implement colors in xu
 - [ ] Implement links in msc
 - [ ] Implement non-aggregated view
+- [ ] Deep Test & Debug
 
 ### Acknowledgement
 
