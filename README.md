@@ -9,10 +9,10 @@ Kibana plugin to Visualize aggregations diagrams using [mscgen](https://mscgen.j
 ### Create Kibana Plugin Release _(zip)_
 Adjust the Kibana version in `package.json` or `release.sh` before execution:
 ```
-./release.sh
+ VERSION="6.2.4" ./release.sh
 ```
 ### Install a GIT Release _(adjust version)_ 
-Each branch contains a `dist` folder with installable versions of the plugin, ie:
+Each branch should contain a release or `dist` folder with installable versions of the plugin, ie:
 ```
 kibana-plugin install https://github.com/lmangani/kibana_diagram/raw/master/dist/kibana_diagram-6.2.4.zip
 ```
