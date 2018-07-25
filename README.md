@@ -2,7 +2,7 @@
 
 ## Kibana Diagram
 
-Kibana plugin to Visualize aggregations diagrams using [mscgen](https://mscgen.js.org) for rendering.
+Kibana plugin to Visualize aggregations diagrams using [mscgenjs](https://mscgen.js.org) for rendering.
 
 <img width=300 src="https://user-images.githubusercontent.com/1423657/43055683-440d4efa-8e38-11e8-9367-44e484e7bf90.png"/>
 
@@ -33,8 +33,8 @@ The plugin will automatically display a diagram with relations derived from the 
 #### TODO
 - [x] Implement Agg to Diagram baseline
 - [x] Implement colors in xu
-- [ ] Implement links in msc
-- [ ] Implement non-aggregated view
+- [ ] Implement links in xu
+- [ ] Implement non-aggregated doc flows like discovery
 - [ ] Deep Test & Debug
 
 ### Acknowledgement
