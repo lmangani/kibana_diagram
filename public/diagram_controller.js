@@ -1,5 +1,5 @@
 import { uiModules } from 'ui/modules'
-import { notify } from 'ui/notify'
+import { toastNotifications } from 'ui/notify';
 import { FilterBarQueryFilterProvider } from 'ui/filter_bar/query_filter'
 import { AggTypesBucketsCreateFilterTermsProvider } from 'ui/agg_types/buckets/create_filter/terms'
 import { AggTypesBucketsCreateFilterFiltersProvider } from 'ui/agg_types/buckets/create_filter/filters'
@@ -38,7 +38,10 @@ module.controller('KbnDiagramController', function ($scope, $sce, $timeout, Priv
     if (hide) {
       $('#' + network_id).hide()
     }
-    notify.error(message)
+    toastNotifications.addDanger({
+  	title: 'General Error',
+	text: message
+    });
   }
 
   $scope.initialShows = function () {
